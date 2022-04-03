@@ -76,7 +76,7 @@ function start(client) {
 						list_active.push(`${result[i].email} : ${result[i].password}\n`);
 						// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 					}
-					if (result) {
+					if (result.length > 0) {
 						client.sendText(message.from, `🤖 *[DAFTAR ACCOUNT STATUS ACTIVE]*\n${list_active.join('')}\n`);
 					} else {
 						client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
@@ -97,7 +97,7 @@ function start(client) {
 							list_active.push(`${result[i].email} : ${result[i].password}\n`);
 							// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
-						if (result) {
+						if (result.length > 0) {
 							client.sendText(
 								message.from,
 								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
@@ -105,6 +105,19 @@ function start(client) {
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Active*\n`);
+						const result = await Wabot.find({ status: 'active' }).select('email password');
+						// console.log(result);
+						let list_active = [];
+						for (let i = 0; i < result.length; i++) {
+							list_active.push(`${result[i].email} : ${result[i].password}\n`);
+							// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						if (result.length > 0) {
+							client.sendText(
+								message.from,
+								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
+							);
+						}
 					}
 				}
 			} else {
@@ -115,7 +128,7 @@ function start(client) {
 					list_active.push(`${result[i].email} : ${result[i].password}\n`);
 					// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 				}
-				if (result) {
+				if (result.length > 0) {
 					client.sendText(
 						message.from,
 						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
@@ -135,7 +148,7 @@ function start(client) {
 						list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
 						// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 					}
-					if (result) {
+					if (result.length > 0) {
 						client.sendText(
 							message.from,
 							`🤖 *[DAFTAR ACCOUNT STATUS DISABLED]*\n${list_disabled.join('')}\n`
@@ -159,7 +172,7 @@ function start(client) {
 							list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
 							// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
-						if (result) {
+						if (result.length > 0) {
 							client.sendText(
 								message.from,
 								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n${list_disabled.join('')}\n`
@@ -167,6 +180,19 @@ function start(client) {
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Disabled*\n`);
+						const result = await Wabot.find({ status: 'disabled' }).select('email password');
+						// console.log(result);
+						let list_disabled = [];
+						for (let i = 0; i < result.length; i++) {
+							list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
+							// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						if (result.length > 0) {
+							client.sendText(
+								message.from,
+								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n${list_disabled.join('')}\n`
+							);
+						}
 					}
 				}
 			} else {
@@ -177,7 +203,7 @@ function start(client) {
 					list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
 					// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 				}
-				if (result) {
+				if (result.length > 0) {
 					client.sendText(
 						message.from,
 						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n${list_disabled.join('')}\n`
@@ -197,7 +223,7 @@ function start(client) {
 						list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 						// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 					}
-					if (result) {
+					if (result.length > 0) {
 						client.sendText(message.from, `🤖 *[DAFTAR ACCOUNT STATUS SOLD]*\n${list_sold.join('')}\n`);
 					} else {
 						client.sendText(message.from, `🤖 *Tidak ada akun berstatus Sold*\n`);
@@ -218,7 +244,7 @@ function start(client) {
 							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
-						if (result) {
+						if (result.length > 0) {
 							client.sendText(
 								message.from,
 								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
@@ -226,6 +252,19 @@ function start(client) {
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Sold*\n`);
+						const result = await Wabot.find({ status: 'sold' }).select('email password');
+						// console.log(result);
+						let list_sold = [];
+						for (let i = 0; i < result.length; i++) {
+							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						if (result.length > 0) {
+							client.sendText(
+								message.from,
+								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+							);
+						}
 					}
 				}
 			} else {
@@ -236,7 +275,7 @@ function start(client) {
 					list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 					// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 				}
-				if (result) {
+				if (result.length > 0) {
 					client.sendText(
 						message.from,
 						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
