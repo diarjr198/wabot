@@ -216,7 +216,7 @@ function start(client) {
 		if (perintah === '.sold') {
 			if (value && value !== '') {
 				if (value === 'ALL') {
-					const result = await Wabot.find({ status: 'sold' }).select('email password');
+					const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).select('email password');
 					// console.log(result);
 					let list_sold = [];
 					for (let i = 0; i < result.length; i++) {
@@ -282,7 +282,7 @@ function start(client) {
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Sold*\n`);
-						const result = await Wabot.find({ status: 'sold' }).select('email password');
+						const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).select('email password');
 						// console.log(result);
 						let list_sold = [];
 						for (let i = 0; i < result.length; i++) {
@@ -302,11 +302,15 @@ function start(client) {
 					}
 				}
 			} else {
-				const result = await Wabot.find({ status: 'sold' }).limit(5).select('email password');
+				const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).limit(5).select('email password');
 				// console.log(result);
 				let list_sold = [];
 				for (let i = 0; i < result.length; i++) {
-					list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+					if (i === 0) {
+						list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+					} else {
+						list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+					}
 					// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 				}
 				if (result.length > 0) {
