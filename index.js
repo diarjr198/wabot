@@ -3,7 +3,7 @@ const mime = require('mime-types');
 const fs = require('fs');
 const { removeBackgroundFromImageUrl, removeBackgroundFromImageFile } = require('remove.bg');
 const connectDB = require('./configs/DB');
-const Wabot = require('models/wabot');
+const Wabot = require('./models/wabot');
 
 connectDB();
 
