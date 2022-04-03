@@ -44,6 +44,18 @@ function start(client) {
 				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
 			);
 		}
+		if (perintah === '.disabled') {
+			await client.sendText(
+				message.from,
+				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
+			);
+		}
+		if (perintah === '.sold') {
+			await client.sendText(
+				message.from,
+				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
+			);
+		}
 		if (message.type === 'image' && message.text === '.removeBg') {
 			const filename = `${message.t}.${mime.extension(message.mimetype)}`;
 			const mediaData = await wa.decryptMedia(message);
