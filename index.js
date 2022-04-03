@@ -46,7 +46,7 @@ function start(client) {
 				const password = word[1];
 				let result;
 				if (status) {
-					result = Wabot.create({
+					result = await Wabot.create({
 						email,
 						password,
 						status
@@ -54,16 +54,16 @@ function start(client) {
 					console.log(result);
 					console.log('Data Berhasil Ditambahkan');
 				} else {
-					result = Wabot.create({
+					result = await Wabot.create({
 						email,
 						password
 					});
 					console.log(result);
 					console.log('Data Berhasil Ditambahkan');
 				}
-				client.sendText(message.from, `🤖 *Email ${result.email} Berhasil Ditambahkan*\n`);
+				await client.sendText(message.from, `🤖 *Email ${result.email} Berhasil Ditambahkan*\n`);
 			} else {
-				client.sendText(message.from, `🤖 *Email Tidak Boleh Kosong*\nContoh: *.add* _email:password_\n`);
+				await client.sendText(message.from, `🤖 *Email Tidak Boleh Kosong*\nContoh: *.add* _email:password_\n`);
 				// const result = Wabot.find({ status: 'active' }).limit(20).select('email password');
 				// if (result) {
 				// 	client.sendText(message.from, `🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${result}\n`);
