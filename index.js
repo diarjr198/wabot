@@ -25,6 +25,9 @@ function start(client) {
 	client.onMessage(async (message) => {
 		// console.log(message);
 		const pesan = message.text.split(' ');
+		const perintah = pesan[0];
+		const value = pesan[1];
+		const status = pesan[2];
 		console.log(pesan);
 		if (message.text === 'Hi') {
 			await client.sendText(message.from, '👋 Hello!');
@@ -33,6 +36,12 @@ function start(client) {
 			await client.sendText(
 				message.from,
 				'🤖 *[DAFTAR LIST COMMAND]*\n*.account* // _Melihat Daftar Account Semua Status_\n*.active* // _Melihat 5 Daftar Account Teratas Status Active_\n*.disabled* // _Melihat 5 Daftar Account Teratas Status Disabled_\n*.sold* // _Melihat 5 Daftar Account Teratas Status Sold_\n*.help* // _Melihat Daftar Command_\n'
+			);
+		}
+		if (perintah === '.active') {
+			await client.sendText(
+				message.from,
+				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
 			);
 		}
 		if (message.type === 'image' && message.text === '.removeBg') {
