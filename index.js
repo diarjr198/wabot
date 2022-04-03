@@ -292,7 +292,7 @@ function start(client) {
 									list_active.push(`${resultActive[i].email} : ${resultActive[i].password}\n`);
 									// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 								}
-								if (resultActive > 0) {
+								if (resultActive.length > 0) {
 									client.sendText(
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
@@ -308,7 +308,7 @@ function start(client) {
 									);
 								}
 							} else {
-								if (resultActive > 0) {
+								if (resultActive.length > 0) {
 									client.sendText(
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
@@ -355,7 +355,7 @@ function start(client) {
 				let list_sold = [];
 				for (let i = 0; i < result.length; i++) {
 					if (i === 0) {
-						list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+						list_sold.push(`${result[i].email} : ${result[i].password} *(Last Sold)*\n`);
 					} else {
 						list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 					}
