@@ -15,7 +15,7 @@ const wabotSchema = new Schema(
 		},
 		status: {
 			type: String,
-			enum: [ 'active', 'sold', 'disabled' ],
+			enum: [ 'active', 'sold', 'disabled', 'inactive' ],
 			default: 'active'
 		}
 	},
