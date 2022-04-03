@@ -260,12 +260,12 @@ function start(client) {
 							// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
 						if (result.length > 0) {
-							if (result.length > 3) {
+							if (result.length > 5) {
 								const deleteData = await Wabot.findOneAndUpdate(
 									{ status: 'sold' },
 									{ status: 'inactive' }
 								);
-								console.log(deleteData);
+								// console.log(deleteData);
 								const result = await Wabot.find({ status: 'sold' })
 									.limit(3)
 									.sort({ _id: -1 })
