@@ -90,7 +90,7 @@ function start(client) {
 							{ new: true }
 						);
 						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
-						const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
+						const result = await Wabot.find({ status: 'active' }).select('email password');
 						// console.log(result);
 						let list_active = [];
 						for (let i = 0; i < result.length; i++) {
@@ -104,7 +104,7 @@ function start(client) {
 							);
 						}
 					} else {
-						client.sendText(message.from, `🤖 *${resultUpdate.email} sudah berstatus Active*\n`);
+						client.sendText(message.from, `🤖 *${value} sudah berstatus Active*\n`);
 					}
 				}
 			} else {
@@ -126,16 +126,125 @@ function start(client) {
 			}
 		}
 		if (perintah === '.disabled') {
-			await client.sendText(
-				message.from,
-				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
-			);
+			if (value && value !== '') {
+				if (value === 'ALL') {
+					const result = await Wabot.find({ status: 'disabled' }).select('email password');
+					// console.log(result);
+					let list_disabled = [];
+					for (let i = 0; i < result.length; i++) {
+						list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
+						// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+					}
+					if (result) {
+						client.sendText(
+							message.from,
+							`🤖 *[DAFTAR ACCOUNT STATUS DISABLED]*\n${list_disabled.join('')}\n`
+						);
+					} else {
+						client.sendText(message.from, `🤖 *Tidak ada akun berstatus Disabled*\n`);
+					}
+				} else {
+					const check = await Wabot.findOne({ email: value });
+					if (check.status !== 'disabled') {
+						const resultUpdate = await Wabot.findOneAndUpdate(
+							{ email: value },
+							{ status: 'disabled' },
+							{ new: true }
+						);
+						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
+						const result = await Wabot.find({ status: 'disabled' }).select('email password');
+						// console.log(result);
+						let list_disabled = [];
+						for (let i = 0; i < result.length; i++) {
+							list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
+							// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						if (result) {
+							client.sendText(
+								message.from,
+								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n${list_disabled.join('')}\n`
+							);
+						}
+					} else {
+						client.sendText(message.from, `🤖 *${value} sudah berstatus Disabled*\n`);
+					}
+				}
+			} else {
+				const result = await Wabot.find({ status: 'disabled' }).limit(5).select('email password');
+				// console.log(result);
+				let list_disabled = [];
+				for (let i = 0; i < result.length; i++) {
+					list_disabled.push(`${result[i].email} : ${result[i].password}\n`);
+					// list_disabled += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+				}
+				if (result) {
+					client.sendText(
+						message.from,
+						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS DISABLED]*\n${list_disabled.join('')}\n`
+					);
+				} else {
+					client.sendText(message.from, `🤖 *Tidak ada akun berstatus Disabled*\n`);
+				}
+			}
 		}
 		if (perintah === '.sold') {
-			await client.sendText(
-				message.from,
-				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
-			);
+			if (value && value !== '') {
+				if (value === 'ALL') {
+					const result = await Wabot.find({ status: 'sold' }).select('email password');
+					// console.log(result);
+					let list_sold = [];
+					for (let i = 0; i < result.length; i++) {
+						list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+						// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+					}
+					if (result) {
+						client.sendText(message.from, `🤖 *[DAFTAR ACCOUNT STATUS SOLD]*\n${list_sold.join('')}\n`);
+					} else {
+						client.sendText(message.from, `🤖 *Tidak ada akun berstatus Sold*\n`);
+					}
+				} else {
+					const check = await Wabot.findOne({ email: value });
+					if (check.status !== 'sold') {
+						const resultUpdate = await Wabot.findOneAndUpdate(
+							{ email: value },
+							{ status: 'sold' },
+							{ new: true }
+						);
+						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
+						const result = await Wabot.find({ status: 'sold' }).select('email password');
+						// console.log(result);
+						let list_sold = [];
+						for (let i = 0; i < result.length; i++) {
+							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						if (result) {
+							client.sendText(
+								message.from,
+								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+							);
+						}
+					} else {
+						client.sendText(message.from, `🤖 *${value} sudah berstatus Sold*\n`);
+					}
+				}
+			} else {
+				const result = await Wabot.find({ status: 'sold' }).limit(5).select('email password');
+				// console.log(result);
+				let list_sold = [];
+				for (let i = 0; i < result.length; i++) {
+					list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+					// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+				}
+				if (result) {
+					client.sendText(
+						message.from,
+						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+					);
+				} else {
+					client.sendText(message.from, `🤖 *Tidak ada akun berstatus Sold*\n`);
+				}
+			}
 		}
 		if (message.type === 'image' && message.text === '.removeBg') {
 			const filename = `${message.t}.${mime.extension(message.mimetype)}`;
