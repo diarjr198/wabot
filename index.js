@@ -220,7 +220,11 @@ function start(client) {
 					// console.log(result);
 					let list_sold = [];
 					for (let i = 0; i < result.length; i++) {
-						list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+						if (i === 0) {
+							list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+						} else {
+							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+						}
 						// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 					}
 					if (result.length > 0) {
@@ -237,18 +241,44 @@ function start(client) {
 							{ new: true }
 						);
 						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
-						const result = await Wabot.find({ status: 'sold' }).select('email password');
+						const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).select('email password');
 						// console.log(result);
 						let list_sold = [];
 						for (let i = 0; i < result.length; i++) {
-							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+							if (i === 0) {
+								list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+							} else {
+								list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+							}
 							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
 						if (result.length > 0) {
-							client.sendText(
-								message.from,
-								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
-							);
+							if (result.length > 3) {
+								const deleteData = await Wabot.findOneAndUpdate({}, { status: 'inactive' });
+								console.log(deleteData);
+								const result = await Wabot.find({ status: 'sold' })
+									.sort({ _id: -1 })
+									.select('email password');
+								// console.log(result);
+								let list_sold = [];
+								for (let i = 0; i < result.length; i++) {
+									if (i === 0) {
+										list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+									} else {
+										list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+									}
+									// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+								}
+								client.sendText(
+									message.from,
+									`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+								);
+							} else {
+								client.sendText(
+									message.from,
+									`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+								);
+							}
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Sold*\n`);
@@ -256,7 +286,11 @@ function start(client) {
 						// console.log(result);
 						let list_sold = [];
 						for (let i = 0; i < result.length; i++) {
-							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+							if (i === 0) {
+								list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+							} else {
+								list_sold.push(`${result[i].email} : ${result[i].password}\n`);
+							}
 							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
 						if (result.length > 0) {
