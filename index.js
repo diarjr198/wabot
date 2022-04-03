@@ -297,14 +297,14 @@ function start(client) {
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 											''
-										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}`
+										)}\n🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}`
 									);
 								} else {
 									client.sendText(
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 											''
-										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\nTidak ada akun yang berstatus Active`
+										)}\n🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\nTidak ada akun yang berstatus Active`
 									);
 								}
 							} else {
@@ -313,14 +313,14 @@ function start(client) {
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 											''
-										)}\n*[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}`
+										)}\n🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}`
 									);
 								} else {
 									client.sendText(
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 											''
-										)}\n*[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\nTidak ada akun yang berstatus Active`
+										)}\n🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\nTidak ada akun yang berstatus Active`
 									);
 								}
 							}
@@ -354,14 +354,14 @@ function start(client) {
 									message.from,
 									`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 										''
-									)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}`
+									)}\n🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}`
 								);
 							} else {
 								client.sendText(
 									message.from,
 									`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 										''
-									)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\nTidak ada akun yang berstatus Active`
+									)}\n🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\nTidak ada akun yang berstatus Active`
 								);
 							}
 						}
