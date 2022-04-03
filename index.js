@@ -36,7 +36,7 @@ function start(client) {
 		if (message.text === '.help') {
 			await client.sendText(
 				message.from,
-				'🤖 *[DAFTAR LIST COMMAND]*\n*.account* // _Melihat Daftar Account Semua Status_\n*.active* // _Melihat 5 Daftar Account Teratas Status Active_\n*.disabled* // _Melihat 5 Daftar Account Teratas Status Disabled_\n*.sold* // _Melihat 5 Daftar Account Teratas Status Sold_\n*.help* // _Melihat Daftar Command_\n'
+				'🤖 *[DAFTAR LIST COMMAND]*\n*.account* // _Melihat Daftar Account Semua Status_\n*.active* // _Melihat 5 Daftar Account Teratas Status Active_\n*.active ALL* // _Melihat Seluruh Daftar Account Status Active_\n*.active* _xxx@gmail.com_ // _Mengubah Status Account menjadi Active_\n*.sold* // _Melihat 5 Daftar Account Teratas Status Sold_\n*.sold ALL* // _Melihat Seluruh Daftar Account Status Sold_\n*.sold* _xxx@gmail.com_ // _Mengubah Status Account menjadi Sold_\n*.disabled* // _Melihat 5 Daftar Account Teratas Status Disabled_\n*.disabled ALL* // _Melihat Seluruh Daftar Account Status Disabled_\n*.disabled* _xxx@gmail.com_ // _Mengubah Status Account menjadi Disabled_\n*.add* _xxx@gmail.com:passwd_ // _Menambah List Email Aktif_\n*.help* // _Melihat Daftar Command_\n\n🤖 *[CARA PAKAI]:* _.nama-command_\n'
 			);
 		}
 		if (perintah === '.add') {
