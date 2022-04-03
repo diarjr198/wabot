@@ -67,20 +67,62 @@ function start(client) {
 			}
 		}
 		if (perintah === '.active') {
-			const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
-			// console.log(result);
-			let list_active = [];
-			for (let i = 0; i < result.length; i++) {
-				list_active.push(`${result[i].email} : ${result[i].password}\n`);
-				// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
-			}
-			if (result) {
-				client.sendText(
-					message.from,
-					`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
-				);
+			if (value && value !== '') {
+				if (value === 'ALL') {
+					const result = await Wabot.find({ status: 'active' }).select('email password');
+					// console.log(result);
+					let list_active = [];
+					for (let i = 0; i < result.length; i++) {
+						list_active.push(`${result[i].email} : ${result[i].password}\n`);
+						// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+					}
+					if (result) {
+						client.sendText(message.from, `🤖 *[DAFTAR ACCOUNT STATUS ACTIVE]*\n${list_active.join('')}\n`);
+					} else {
+						client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
+					}
+				} else {
+					const check = await Wabot.findOne({ email: value });
+					if (check.status !== 'active') {
+						const resultUpdate = await Wabot.findOneAndUpdate(
+							{ email: value },
+							{ status: 'active' },
+							{ new: true }
+						);
+						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
+						const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
+						// console.log(result);
+						let list_active = [];
+						for (let i = 0; i < result.length; i++) {
+							list_active.push(`${result[i].email} : ${result[i].password}\n`);
+							// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						if (result) {
+							client.sendText(
+								message.from,
+								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
+							);
+						}
+					} else {
+						client.sendText(message.from, `🤖 *${resultUpdate.email} sudah berstatus Active*\n`);
+					}
+				}
 			} else {
-				client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
+				const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
+				// console.log(result);
+				let list_active = [];
+				for (let i = 0; i < result.length; i++) {
+					list_active.push(`${result[i].email} : ${result[i].password}\n`);
+					// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+				}
+				if (result) {
+					client.sendText(
+						message.from,
+						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
+					);
+				} else {
+					client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
+				}
 			}
 		}
 		if (perintah === '.disabled') {
