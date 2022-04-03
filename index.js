@@ -1,10 +1,10 @@
 const wa = require('@open-wa/wa-automate');
 const mime = require('mime-types');
 const fs = require('fs');
-// import { RemoveBgResult, RemoveBgError, removeBackgroundFromImageFile } from 'remove.bg';
-// const RmBg = require('remove.bg');
-// var request = require('request');
 const { removeBackgroundFromImageUrl, removeBackgroundFromImageFile } = require('remove.bg');
+const connectDB = require('./configs/DB');
+
+connectDB();
 
 wa
 	.create({
