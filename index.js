@@ -38,6 +38,39 @@ function start(client) {
 				'🤖 *[DAFTAR LIST COMMAND]*\n*.account* // _Melihat Daftar Account Semua Status_\n*.active* // _Melihat 5 Daftar Account Teratas Status Active_\n*.disabled* // _Melihat 5 Daftar Account Teratas Status Disabled_\n*.sold* // _Melihat 5 Daftar Account Teratas Status Sold_\n*.help* // _Melihat Daftar Command_\n'
 			);
 		}
+		if (perintah === '.add') {
+			if (value && value !== '') {
+				const word = value.split(':');
+				const email = word[0];
+				const password = word[1];
+				let result;
+				if (status) {
+					result = Wabot.create({
+						email,
+						password,
+						status
+					});
+					console.log(result);
+					console.log('Data Berhasil Ditambahkan');
+				} else {
+					result = Wabot.create({
+						email,
+						password
+					});
+					console.log(result);
+					console.log('Data Berhasil Ditambahkan');
+				}
+				client.sendText(message.from, `🤖 *Email ${result.email} Berhasil Ditambahkan*\n`);
+			} else {
+				client.sendText(message.from, `🤖 *Email Tidak Boleh Kosong*\nContoh: *.add* _email:password_\n`);
+				// const result = Wabot.find({ status: 'active' }).limit(20).select('email password');
+				// if (result) {
+				// 	client.sendText(message.from, `🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${result}\n`);
+				// } else {
+				// 	client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
+				// }
+			}
+		}
 		if (perintah === '.active') {
 			await client.sendText(
 				message.from,
