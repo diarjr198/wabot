@@ -29,7 +29,7 @@ function start(client) {
 		const perintah = pesan[0];
 		const value = pesan[1];
 		const status = pesan[2];
-		console.log(pesan);
+		// console.log(pesan);
 		if (message.text === 'Hi') {
 			await client.sendText(message.from, '👋 Hello!');
 		}
@@ -313,14 +313,14 @@ function start(client) {
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 											''
-										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_active.join('')}`
+										)}\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_active.join('')}`
 									);
 								} else {
 									client.sendText(
 										message.from,
 										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
 											''
-										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\nTidak ada akun yang berstatus Active`
+										)}\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\nTidak ada akun yang berstatus Active`
 									);
 								}
 							}
@@ -341,11 +341,29 @@ function start(client) {
 							}
 							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
+						const resultActive = await Wabot.find({ status: 'active' }).limit(5).select('email password');
+						// console.log(result);
+						let list_active = [];
+						for (let i = 0; i < resultActive.length; i++) {
+							list_active.push(`${resultActive[i].email} : ${resultActive[i].password}\n`);
+							// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
 						if (result.length > 0) {
-							client.sendText(
-								message.from,
-								`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
-							);
+							if (resultActive.length > 0) {
+								client.sendText(
+									message.from,
+									`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
+										''
+									)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_active.join('')}`
+								);
+							} else {
+								client.sendText(
+									message.from,
+									`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
+										''
+									)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\nTidak ada akun yang berstatus Active`
+								);
+							}
 						}
 					}
 				}
