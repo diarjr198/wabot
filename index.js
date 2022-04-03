@@ -254,7 +254,10 @@ function start(client) {
 						}
 						if (result.length > 0) {
 							if (result.length > 3) {
-								const deleteData = await Wabot.findOneAndUpdate({}, { status: 'inactive' });
+								const deleteData = await Wabot.findOneAndUpdate(
+									{ status: 'sold' },
+									{ status: 'inactive' }
+								);
 								console.log(deleteData);
 								const result = await Wabot.find({ status: 'sold' })
 									.sort({ _id: -1 })
