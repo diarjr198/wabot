@@ -51,15 +51,15 @@ function start(client) {
 						password,
 						status
 					});
-					console.log(result);
-					console.log('Data Berhasil Ditambahkan');
+					// console.log(result);
+					// console.log('Data Berhasil Ditambahkan');
 				} else {
 					result = await Wabot.create({
 						email,
 						password
 					});
-					console.log(result);
-					console.log('Data Berhasil Ditambahkan');
+					// console.log(result);
+					// console.log('Data Berhasil Ditambahkan');
 				}
 				await client.sendText(message.from, `🤖 *Email ${result.email} Berhasil Ditambahkan*\n`);
 			} else {
