@@ -241,10 +241,7 @@ function start(client) {
 							{ new: true }
 						);
 						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
-						const result = await Wabot.find({ status: 'sold' })
-							.limit(3)
-							.sort({ _id: -1 })
-							.select('email password');
+						const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).select('email password');
 						// console.log(result);
 						let list_sold = [];
 						for (let i = 0; i < result.length; i++) {
