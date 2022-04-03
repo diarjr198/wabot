@@ -90,7 +90,7 @@ function start(client) {
 							{ new: true }
 						);
 						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
-						const result = await Wabot.find({ status: 'active' }).select('email password');
+						const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
 						// console.log(result);
 						let list_active = [];
 						for (let i = 0; i < result.length; i++) {
@@ -105,7 +105,7 @@ function start(client) {
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Active*\n`);
-						const result = await Wabot.find({ status: 'active' }).select('email password');
+						const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
 						// console.log(result);
 						let list_active = [];
 						for (let i = 0; i < result.length; i++) {
@@ -221,7 +221,7 @@ function start(client) {
 					let list_sold = [];
 					for (let i = 0; i < result.length; i++) {
 						if (i === 0) {
-							list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+							list_sold.push(`${result[i].email} : ${result[i].password} *(Last Sold)*\n`);
 						} else {
 							list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 						}
@@ -241,16 +241,26 @@ function start(client) {
 							{ new: true }
 						);
 						client.sendText(message.from, `🤖 *${resultUpdate.email} berhasil diUpdate*\n`);
-						const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).select('email password');
+						const result = await Wabot.find({ status: 'sold' })
+							.limit(3)
+							.sort({ _id: -1 })
+							.select('email password');
 						// console.log(result);
 						let list_sold = [];
 						for (let i = 0; i < result.length; i++) {
 							if (i === 0) {
-								list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+								list_sold.push(`${result[i].email} : ${result[i].password} *(Last Sold)*\n`);
 							} else {
 								list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 							}
 							// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+						}
+						const resultActive = await Wabot.find({ status: 'active' }).limit(5).select('email password');
+						// console.log(result);
+						let list_active = [];
+						for (let i = 0; i < resultActive.length; i++) {
+							list_active.push(`${resultActive[i].email} : ${resultActive[i].password}\n`);
+							// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 						}
 						if (result.length > 0) {
 							if (result.length > 3) {
@@ -260,37 +270,72 @@ function start(client) {
 								);
 								console.log(deleteData);
 								const result = await Wabot.find({ status: 'sold' })
+									.limit(3)
 									.sort({ _id: -1 })
 									.select('email password');
 								// console.log(result);
 								let list_sold = [];
 								for (let i = 0; i < result.length; i++) {
 									if (i === 0) {
-										list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+										list_sold.push(`${result[i].email} : ${result[i].password} *(Last Sold)*\n`);
 									} else {
 										list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 									}
 									// list_sold += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
 								}
-								client.sendText(
-									message.from,
-									`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
-								);
+								const resultActive = await Wabot.find({ status: 'active' })
+									.limit(5)
+									.select('email password');
+								// console.log(result);
+								let list_active = [];
+								for (let i = 0; i < resultActive.length; i++) {
+									list_active.push(`${resultActive[i].email} : ${resultActive[i].password}\n`);
+									// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+								}
+								if (resultActive > 0) {
+									client.sendText(
+										message.from,
+										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
+											''
+										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_active.join('')}`
+									);
+								} else {
+									client.sendText(
+										message.from,
+										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
+											''
+										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\nTidak ada akun yang berstatus Active`
+									);
+								}
 							} else {
-								client.sendText(
-									message.from,
-									`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
-								);
+								if (resultActive > 0) {
+									client.sendText(
+										message.from,
+										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
+											''
+										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_active.join('')}`
+									);
+								} else {
+									client.sendText(
+										message.from,
+										`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join(
+											''
+										)}\n\n*[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\nTidak ada akun yang berstatus Active`
+									);
+								}
 							}
 						}
 					} else {
 						client.sendText(message.from, `🤖 *${value} sudah berstatus Sold*\n`);
-						const result = await Wabot.find({ status: 'sold' }).sort({ _id: -1 }).select('email password');
+						const result = await Wabot.find({ status: 'sold' })
+							.sort({ _id: -1 })
+							.limit(3)
+							.select('email password');
 						// console.log(result);
 						let list_sold = [];
 						for (let i = 0; i < result.length; i++) {
 							if (i === 0) {
-								list_sold.push(`${result[i].email} : ${result[i].password} (Last Sold)\n`);
+								list_sold.push(`${result[i].email} : ${result[i].password} *(Last Sold)*\n`);
 							} else {
 								list_sold.push(`${result[i].email} : ${result[i].password}\n`);
 							}
@@ -299,7 +344,7 @@ function start(client) {
 						if (result.length > 0) {
 							client.sendText(
 								message.from,
-								`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+								`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
 							);
 						}
 					}
@@ -319,7 +364,7 @@ function start(client) {
 				if (result.length > 0) {
 					client.sendText(
 						message.from,
-						`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
+						`🤖 *[DAFTAR 3 ACCOUNT TERATAS STATUS SOLD]*\n${list_sold.join('')}\n`
 					);
 				} else {
 					client.sendText(message.from, `🤖 *Tidak ada akun berstatus Sold*\n`);
