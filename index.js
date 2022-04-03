@@ -64,19 +64,16 @@ function start(client) {
 				await client.sendText(message.from, `🤖 *Email ${result.email} Berhasil Ditambahkan*\n`);
 			} else {
 				await client.sendText(message.from, `🤖 *Email Tidak Boleh Kosong*\nContoh: *.add* _email:password_\n`);
-				// const result = Wabot.find({ status: 'active' }).limit(20).select('email password');
-				// if (result) {
-				// 	client.sendText(message.from, `🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${result}\n`);
-				// } else {
-				// 	client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
-				// }
 			}
 		}
 		if (perintah === '.active') {
-			await client.sendText(
-				message.from,
-				'🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n1. @covid_helper_bot\n2. @covid_helper_bot\n3. @covid_helper_bot\n4. @covid_helper_bot\n5. @covid_helper_bot\n'
-			);
+			const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
+			console.log(result);
+			if (result) {
+				client.sendText(message.from, `🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${result}\n`);
+			} else {
+				client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
+			}
 		}
 		if (perintah === '.disabled') {
 			await client.sendText(
