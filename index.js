@@ -68,9 +68,17 @@ function start(client) {
 		}
 		if (perintah === '.active') {
 			const result = await Wabot.find({ status: 'active' }).limit(5).select('email password');
-			console.log(result);
+			// console.log(result);
+			let list_active = [];
+			for (let i = 0; i < result.length; i++) {
+				list_active.push(`${result[i].email} : ${result[i].password}\n`);
+				// list_active += `${i + 1}. ${result[i].email} : ${result[i].password}\n`;
+			}
 			if (result) {
-				client.sendText(message.from, `🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${result}\n`);
+				client.sendText(
+					message.from,
+					`🤖 *[DAFTAR 5 ACCOUNT TERATAS STATUS ACTIVE]*\n${list_active.join('')}\n`
+				);
 			} else {
 				client.sendText(message.from, `🤖 *Tidak ada akun berstatus Active*\n`);
 			}
