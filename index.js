@@ -24,7 +24,7 @@ wa
 
 function start(client) {
 	client.onMessage(async (message) => {
-		// console.log(message);
+		console.log(message.type);
 		const pesan = message.text.split(' ');
 		const perintah = pesan[0];
 		const value = pesan[1];
