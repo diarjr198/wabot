@@ -416,11 +416,18 @@ function start(client) {
 				.then((result) => {
 					console.log(`File saved to ${outputFile}`);
 
-					client.sendImage(
+					// client.sendImage(
+					// 	message.from,
+					// 	outputFile,
+					// 	`${outputName[0]}-removebg.png`,
+					// 	`Your background ${message.type} has been removed!`
+					// );
+					client.sendFile(
 						message.from,
 						outputFile,
 						`${outputName[0]}-removebg.png`,
-						`Your background ${message.type} has been removed!`
+						`Your background ${message.type} has been removed!`,
+						`removebg`
 					);
 				})
 				.catch((errors) => {
