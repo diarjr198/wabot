@@ -427,5 +427,17 @@ function start(client) {
 					console.log(JSON.stringify(errors));
 				});
 		}
+		if (message.type === 'image' && message.text === '.sticker') {
+			const filename = `${message.t}.${mime.extension(message.mimetype)}`;
+			const mediaData = await wa.decryptMedia(message);
+			const imageBase64 = `data:${message.mimetype};base64,${mediaData.toString('base64')}`;
+			fs.writeFileSync(`./image/${filename}`, mediaData, function(err) {
+				if (err) {
+					return console.log(err);
+				}
+				console.log('The file was saved!');
+			});
+			client.sendImageAsSticker(message.from, imageBase64, filename);
+		}
 	});
 }
