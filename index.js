@@ -426,8 +426,7 @@ function start(client) {
 						message.from,
 						outputFile,
 						`${outputName[0]}-removebg.png`,
-						`Your background ${message.type} has been removed!`,
-						`removebg`
+						`Your background ${message.type} has been removed!`
 					);
 				})
 				.catch((errors) => {
