@@ -416,24 +416,36 @@ function start(client) {
 				.then((result) => {
 					console.log(`File saved to ${outputFile}`);
 
-					// client.sendImage(
-					// 	message.from,
-					// 	outputFile,
-					// 	`${outputName[0]}-removebg.png`,
-					// 	`Your background ${message.type} has been removed!`
-					// );
-					client.sendFile(
+					client.sendImage(
 						message.from,
 						outputFile,
 						`${outputName[0]}-removebg.png`,
 						`Your background ${message.type} has been removed!`
 					);
+					// client.sendFile(
+					// 	message.from,
+					// 	outputFile,
+					// 	`${outputName[0]}-removebg.png`,
+					// 	`Your background ${message.type} has been removed!`
+					// );
 				})
 				.catch((errors) => {
 					console.log(JSON.stringify(errors));
 				});
 		}
 		if (message.type === 'image' && message.text === '.sticker') {
+			const filename = `${message.t}.${mime.extension(message.mimetype)}`;
+			const mediaData = await wa.decryptMedia(message);
+			const imageBase64 = `data:${message.mimetype};base64,${mediaData.toString('base64')}`;
+			fs.writeFileSync(`./image/${filename}`, mediaData, function(err) {
+				if (err) {
+					return console.log(err);
+				}
+				console.log('The file was saved!');
+			});
+			client.sendImageAsSticker(message.from, imageBase64, { author: 'Bot Diar', cropPosition: 'center' });
+		}
+		if (message.type === 'video' && message.text === '.sticker') {
 			const filename = `${message.t}.${mime.extension(message.mimetype)}`;
 			const mediaData = await wa.decryptMedia(message);
 			const imageBase64 = `data:${message.mimetype};base64,${mediaData.toString('base64')}`;
