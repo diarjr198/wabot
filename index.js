@@ -455,7 +455,7 @@ function start(client) {
 				}
 				console.log('The file was saved!');
 			});
-			client.sendImageAsSticker(message.from, imageBase64, { author: 'Bot Diar', cropPosition: 'center' });
+			client.sendMp4AsSticker(message.from, imageBase64, { author: 'Bot Diar', cropPosition: 'center' });
 		}
 	});
 }
