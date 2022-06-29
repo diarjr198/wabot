@@ -1,6 +1,7 @@
 const wa = require("@open-wa/wa-automate");
 const mime = require("mime-types");
 const fs = require("fs");
+const express = require("express");
 const {
     removeBackgroundFromImageUrl,
     removeBackgroundFromImageFile,
@@ -10,6 +11,13 @@ const Wabot = require("./models/wabot");
 const Group = require("./models/group");
 
 connectDB();
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+    console.log("Server Running!");
+});
 
 wa.create({
     sessionId: "COVID_HELPER",
