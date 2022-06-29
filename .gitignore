@@ -1,6 +1,7 @@
 node_modules
 _IGNORE_COVID_HELPER
 COVID_HELPER.data.json
+package-lock.json
 
 # managed by open-wa
 **.data.json
