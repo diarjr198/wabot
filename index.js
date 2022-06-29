@@ -13,8 +13,8 @@ connectDB();
 
 wa.create({
     sessionId: "COVID_HELPER",
-    multiDevice: true, //required to enable multiDevice support
-    authTimeout: 60, //wait only 60 seconds to get a connection with the host account device
+    // multiDevice: true, //required to enable multiDevice support
+    // authTimeout: 60, //wait only 60 seconds to get a connection with the host account device
     // blockCrashLogs: true,
     // disableSpins: true,
     // headless: true,
